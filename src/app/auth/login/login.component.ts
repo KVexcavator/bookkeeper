@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/models/user.model';
 import { Message } from 'src/app/shared/models/message.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+
 
 @Component({
   selector: 'bkp-login',
@@ -14,7 +18,11 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   message: Message;
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.message = new Message("danger","");
@@ -44,7 +52,10 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User)=>{
         if(user){
           if(user.password === formData.password){
-            // logic
+            this.message.text = '';
+            window.localStorage.setItem('user', JSON.stringify(user));
+            this.authService.login();
+            // this.router.navigate(['']);
           }else{
             this.showMessage("Пароль не верный");
           }
