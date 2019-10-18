@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { User } from 'src/app/shared/models/user.model';
+import { Message } from 'src/app/shared/models/message.model';
 
 @Component({
   selector: 'bkp-login',
@@ -9,10 +12,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  message: Message;
 
-  constructor() { }
+  constructor(private userService: UsersService) { }
 
   ngOnInit() {
+    this.message = new Message("danger","");
     this.form = new FormGroup({
       'email': new FormControl(null, [
         Validators.required,
@@ -25,8 +30,28 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  private showMessage(text: string, type: string = "danger"){
+    this.message = new Message(type,text);
+    window.setTimeout(()=>{
+      this.message.text = '';
+    }, 3000)
+  }
+
   onSubmit(){
-    console.log(this.form);
+    const formData = this.form.value;
+
+    this.userService.getUserByEmail(formData.email)
+      .subscribe((user: User)=>{
+        if(user){
+          if(user.password === formData.password){
+            // logic
+          }else{
+            this.showMessage("Пароль не верный");
+          }
+        }else{
+          this.showMessage("Такого пользователя не существует");
+        }
+      })
   }
 
 }
