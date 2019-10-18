@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { UsersService } from 'src/app/shared/services/users.service';
+import { User } from 'src/app/shared/models/user.model';
+
 
 @Component({
   selector: 'bkp-registration',
@@ -10,7 +15,10 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor(
+    private userService: UsersService,
+    private route: Router
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -32,7 +40,17 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form);
+    const {email, password, name} = this.form.value;
+    const user = new User(email, password, name);
+
+    this.userService.createNewUser(user)
+      .subscribe((user: User)=>{
+        this.route.navigate(['/login'], {
+          queryParams: {
+            nowCanLogin: true
+          }
+        });
+      })
   }
 
 }
