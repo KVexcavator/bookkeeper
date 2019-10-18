@@ -24,8 +24,9 @@ export class RegistrationComponent implements OnInit {
     this.form = new FormGroup({
       'email': new FormControl(null, [
         Validators.required,
-        Validators.email
-      ]),
+        Validators.email],
+        this.forbbidenEmails.bind(this)
+      ),
       'password': new FormControl(null, [
         Validators.required,
         Validators.minLength(6)
@@ -51,6 +52,20 @@ export class RegistrationComponent implements OnInit {
           }
         });
       })
+  }
+
+  forbbidenEmails(control: FormControl): Promise<any>{
+    return new Promise((resolve, reject)=>{
+      this.userService.getUserByEmail(control.value)
+        .subscribe((user: User)=>{
+          if(user){
+            resolve({forbbidenEmail: true});
+            console.log(user)
+          }else{
+            resolve(null);
+          }
+        })
+    })
   }
 
 }
