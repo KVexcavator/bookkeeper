@@ -11,6 +11,9 @@ import { SystemComponent } from './system.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { DrowpdownDirective } from './shared/directives/drowpdown.directive';
+import { BillCardComponent } from './bill-page/bill-card/bill-card.component';
+import { CurrencyCardComponent } from './bill-page/currency-card/currency-card.component';
+import { BillService } from './shared/services/bill.service';
 
 @NgModule({
   imports: [
@@ -26,7 +29,12 @@ import { DrowpdownDirective } from './shared/directives/drowpdown.directive';
     SystemComponent,
     SidebarComponent,
     HeaderComponent,
-    DrowpdownDirective
+    DrowpdownDirective,
+    BillCardComponent,
+    CurrencyCardComponent
+  ],
+  providers: [
+    BillService
   ]
 })
 
