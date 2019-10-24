@@ -45,7 +45,9 @@ export class BillPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.sub_1.unsubscribe();
-    this.sub_2.unsubscribe();
+    if(this.sub_2){
+      this.sub_2.unsubscribe();
+    }    
   }
 
 
