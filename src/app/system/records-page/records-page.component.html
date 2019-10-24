@@ -4,7 +4,8 @@
   </h3>
 </div>
 
-<section class="section">
+<section class="section text-center" *ngIf="!isLoaded">Loading ... </section>
+<section class="section" *ngIf="isLoaded">
   <div class="row">
       <div class="col-md-6">
         <bkp-add-event></bkp-add-event>
@@ -15,7 +16,7 @@
   </div>
   <div class="row">
       <div class="col-md-6">
-          <bkp-edit-category></bkp-edit-category>
+          <bkp-edit-category [categories]="categories"></bkp-edit-category>
       </div>
   </div>
 </section>
