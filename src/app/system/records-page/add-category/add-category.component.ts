@@ -17,7 +17,7 @@ export class AddCategoryComponent {
 
   onSubmit(form: NgForm){
     let { name, capacity } = form.value;
-    if(capacity < 1){
+    if(capacity < 0){
       capacity *= -1;
     }
 
