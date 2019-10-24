@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -8,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
 import { SystemModule } from './system/system.module';
+import { CategoriesService } from './system/shared/services/categories.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,17 @@ import { SystemModule } from './system/system.module';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
-    SystemModule
+    SystemModule,
+    
   ],
   providers: [
     UsersService,
-    AuthService
+    AuthService,
+    CategoriesService
   ],
   bootstrap: [AppComponent]
 })
