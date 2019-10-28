@@ -1,15 +1,18 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { CategoriesService } from '../../shared/services/categories.service';
 import { Category } from '../../shared/models/category.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bkp-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.scss']
 })
-export class AddCategoryComponent {
+export class AddCategoryComponent implements OnDestroy{
+
+  sub_1: Subscription;
 
   @Output() onCategoryAdd = new EventEmitter<Category>();
 
@@ -23,12 +26,16 @@ export class AddCategoryComponent {
 
     const category = new Category(name, capacity);
 
-    this.categoriecService.addCategory(category)
+    this.sub_1 = this.categoriecService.addCategory(category)
       .subscribe((category: Category)=>{
         form.reset();
         form.form.patchValue({capacity: 1});
         this.onCategoryAdd.emit(category);
       })
+  }
+
+  ngOnDestroy(): void {
+    if(this.sub_1) this.sub_1.unsubscribe();
   }
 
 }

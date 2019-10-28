@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
 import { SystemModule } from './system/system.module';
-import { CategoriesService } from './system/shared/services/categories.service';
+
 
 @NgModule({
   declarations: [
@@ -26,8 +26,7 @@ import { CategoriesService } from './system/shared/services/categories.service';
   ],
   providers: [
     UsersService,
-    AuthService,
-    CategoriesService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
