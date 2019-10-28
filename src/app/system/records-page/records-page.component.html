@@ -8,7 +8,9 @@
 <section class="section" *ngIf="isLoaded">
   <div class="row">
       <div class="col-md-6">
-        <bkp-add-event></bkp-add-event>
+        <bkp-add-event 
+          [categories]="categories"
+        ></bkp-add-event>
       </div>
       <div class="col-md-6">
         <bkp-add-category (onCategoryAdd)="newCategoryAdded($event)"></bkp-add-category>
