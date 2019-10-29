@@ -3,8 +3,12 @@
       Страница истории <span class="sparkline bar"></span>
   </h3>
 </div>
-<bkp-history-chart></bkp-history-chart>
-<bkp-history-events></bkp-history-events>
-<bkp-history-filter></bkp-history-filter>
+<div *ngIf="!isLoaded" class="text-center">Loaded ... </div>
+<div *ngIf="isLoaded">
+    <bkp-history-chart [date]="chartDate"></bkp-history-chart>
+    <bkp-history-events></bkp-history-events>
+    <bkp-history-filter></bkp-history-filter>
+</div>
+
 
 
