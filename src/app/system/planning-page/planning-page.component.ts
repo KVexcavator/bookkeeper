@@ -42,6 +42,15 @@ export class PlanningPageComponent implements OnInit, OnDestroy {
     })
   }
 
+  getCategoryCoast(category: Category): number {
+    const categoryEvents = this.events
+      .filter(event => event.category === category.id && event.type === 'outcome')
+    return categoryEvents.reduce((total, event) => {
+      total += event.amount;
+      return total;
+    }, 0)
+  }
+
   ngOnDestroy(): void {
     if(this.sub_1) this.sub_1.unsubscribe();
   }
