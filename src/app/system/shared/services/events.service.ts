@@ -18,4 +18,10 @@ export class EventsService extends BaseApi{
   }
 
 
+  getEvents(): Observable<BKPEvent[]>{
+    return this.get('events');
+  }
+
+
+
 }
