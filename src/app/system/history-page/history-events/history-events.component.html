@@ -41,7 +41,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let e of events; let i=index">
+                        <tr *ngFor="let e of events | bkpFilter: searchValue: searchField ; let i=index">
                             <th scope="row">{{ i+1 }}</th>
                             <td>{{ e.amount | number: '1.2-2' }}</td>
                             <td>{{ e.date | bkpMoment: 'DD.MM.YYYY HH:mm:ss'}}</td>
