@@ -22,6 +22,8 @@ export class EventsService extends BaseApi{
     return this.get('events');
   }
 
-
+  getEventById(id: string): Observable<BKPEvent>{
+    return this.get(`events/${id}`);
+  }
 
 }
