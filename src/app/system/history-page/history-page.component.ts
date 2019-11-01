@@ -19,6 +19,7 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   events: BKPEvent[] = [];
   chartDate = [];
+  isFilterVisible = false;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -51,6 +52,14 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
         },0)
       })
     })
+  }
+
+  private toggleFilterVisibility(nav: boolean){
+    this.isFilterVisible = nav;
+  }
+
+  openFilter(){
+    this.toggleFilterVisibility(true);
   }
 
   ngOnDestroy(): void {
