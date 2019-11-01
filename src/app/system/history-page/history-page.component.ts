@@ -62,6 +62,12 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
     this.toggleFilterVisibility(true);
   }
 
+  onFilterApply(){}
+
+  onFilterCancel(){
+    this.toggleFilterVisibility(false);
+  }
+
   ngOnDestroy(): void {
     if(this.sub_1) this.sub_1.unsubscribe();
   }

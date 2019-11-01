@@ -16,7 +16,11 @@
       [events]="events"
     ></bkp-history-events>
     <div *ngIf="isFilterVisible">
-      <bkp-history-filter></bkp-history-filter>
+      <bkp-history-filter
+        (onFilterApply)="onFilterApply()"
+        (onFilterCancel)="onFilterCancel()"
+        [categories]="categories"
+      ></bkp-history-filter>
     </div>    
 </div>
 
