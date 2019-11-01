@@ -30,12 +30,12 @@
     },
     {
       "id": 3,
-      "name": "Машина",
+      "name": "На баб",
       "capacity": 7000
     },
     {
-      "name": "Test",
-      "capacity": 6666,
+      "name": "Барахло",
+      "capacity": 6000,
       "id": 4
     }
   ],
@@ -78,14 +78,14 @@
       "category": 3,
       "date": "01.11.2019 14:01:58",
       "id": 5,
-      "description": "Заправка + проход ТО"
+      "description": "Сходил в кабак"
     },
     {
       "type": "outcome",
-      "amount": 6000,
+      "amount": 2000,
       "category": 4,
       "date": "01.11.2019 13:55:13",
-      "description": "test",
+      "description": "ксерокс купил",
       "id": 6
     }
   ]

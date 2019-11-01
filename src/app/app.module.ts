@@ -10,11 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
+import { NotFaundComponent } from './shared/components/not-faund/not-faund.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFaundComponent
   ],
   imports: [
     BrowserModule,
