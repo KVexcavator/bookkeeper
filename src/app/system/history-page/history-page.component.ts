@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, combineLatest } from 'rxjs';
+import * as moment from 'moment';
 
 import { CategoriesService } from '../shared/services/categories.service';
 import { EventsService } from '../shared/services/events.service';
@@ -18,6 +19,7 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
   isLoaded = false;
   categories: Category[] = [];
   events: BKPEvent[] = [];
+  filteredEvents: BKPEvent[] = [];
   chartDate = [];
   isFilterVisible = false;
 
@@ -33,7 +35,8 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
     ).subscribe((date: [ Category[], BKPEvent[] ]) => {
       this.categories = date[0];
       this.events = date[1];
-      this.calculateChartDate();
+      this.setOriginalEvents();
+      this.calculateChartDate();      
       // after complete
       this.isLoaded = true;
     })
@@ -42,7 +45,7 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
   calculateChartDate(): void {
     this.chartDate = [];
     this.categories.forEach((cat) => {
-      const catEvents = this.events
+      const catEvents = this.filteredEvents
         .filter((e) => e.category === cat.id && e.type === 'outcome');
       this.chartDate.push({
         "name": cat.name,
@@ -58,16 +61,37 @@ export class HistoryPageComponent implements OnInit, OnDestroy {
     this.isFilterVisible = nav;
   }
 
+  private setOriginalEvents(){
+    this.filteredEvents = this.events.slice();
+  }
+
   openFilter(){
     this.toggleFilterVisibility(true);
   }
 
   onFilterApply(filterData){
-    console.log(filterData);
+    this.toggleFilterVisibility(false);
+    this.setOriginalEvents();
+    const startPeriod = moment().startOf(filterData.period).startOf("d");
+    const endPeriod = moment().endOf(filterData.period).endOf("d");
+    this.filteredEvents = this.filteredEvents
+      .filter((e) => {
+        return filterData.types.indexOf(e.type) !== -1;
+      })
+      .filter((e) => {
+        return filterData.categories.indexOf(e.category.toString()) !== -1;
+      })
+      .filter((e) => {
+        const momentDate = moment(e.date, 'DD.MM.YYYY HH:mm:ss');
+        return momentDate.isBetween(startPeriod, endPeriod)
+      })
+    this.calculateChartDate();
   }
 
   onFilterCancel(){
     this.toggleFilterVisibility(false);
+    this.setOriginalEvents();
+    this.calculateChartDate();
   }
 
   ngOnDestroy(): void {

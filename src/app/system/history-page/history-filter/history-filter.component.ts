@@ -20,7 +20,7 @@ export class HistoryFilterComponent {
     { type: 'd', label: 'День' },
     { type: 'w', label: 'Неделя' },
     { type: 'M', label: 'Месяц' },
-    { type: 'Y', label: 'Год' }
+    { type: 'y', label: 'Год' }
   ];
 
   types = [

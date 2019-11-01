@@ -13,7 +13,7 @@
     <bkp-history-chart [date]="chartDate"></bkp-history-chart>
     <bkp-history-events
       [categories]="categories"
-      [events]="events"
+      [events]="filteredEvents"
     ></bkp-history-events>
     <div *ngIf="isFilterVisible">
       <bkp-history-filter
