@@ -8,7 +8,9 @@
     </button>
   </div>
 </div>
-<div *ngIf="!isLoaded" class="text-center">Loaded ... </div>
+<div *ngIf="!isLoaded" class="text-center">
+    <bkp-loader></bkp-loader>
+</div>
 <div *ngIf="isLoaded">
     <bkp-history-chart [date]="chartDate"></bkp-history-chart>
     <bkp-history-events
